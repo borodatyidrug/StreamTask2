@@ -32,7 +32,7 @@ public class StreamTask2 {
                 .count());
         List<String> сonscripts = persons.stream()
                 .filter(x -> x.getSex() == Sex.MAN)
-                .filter(x -> x.getAge() > 18)
+                .filter(x -> x.getAge() >= 18)
                 .filter(x -> x.getAge() < 27)
                 .map(x -> x.getFamily())
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class StreamTask2 {
         List<Person> operable = persons.stream()
                 .filter(x -> x.getAge() >= 18)
                 .filter(x -> x.getAge() <= 65)
-                .dropWhile(x -> (x.getAge() > 60) && (x.getSex() == Sex.WOMAN))
+                .filter(x -> !((x.getAge() > 60) && (x.getSex() == Sex.WOMAN)))
                 .filter(x -> x.getEducation() == Education.HIGHER)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
